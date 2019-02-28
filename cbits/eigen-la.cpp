@@ -66,14 +66,14 @@ API(image, (int code, Decomposition d, void** p0, int* r0, int* c0, const void* 
 template <class T>
 RET pivots(Decomposition d, void** p0, int* c0, const void* p1, int r1, int c1) {
     typedef Map< Matrix<T,Dynamic,Dynamic> > MapMatrixIn;
-    typedef Map< Matrix<Index,1,Dynamic> > MapMatrixOut;
+    typedef Map< Matrix<int,1,Dynamic> > MapMatrixOut;
     if (d != ::FullPivLU)
         return strdup("Selected decomposition doesn't support pivots revealing.");
     MapMatrixIn A((T*)p1,r1,c1);
-    Matrix<Index,1,Dynamic> B = A.fullPivLu().pivots(A);
+    Matrix<int,1,Dynamic> B = A.fullPivLu().pivots(A);
     *c0 = B.cols();
-    *p0 = malloc(*c0 * sizeof(Index));
-    MapMatrixOut((Index*)*p0, 1, *c0) = B;
+    *p0 = malloc(*c0 * sizeof(int));
+    MapMatrixOut((int*)*p0, 1, *c0) = B;
     return 0;
 }
 API(pivots, (int code, Decomposition d, void** p0, int* c0, const void* p1, int r1, int c1), (d,p0,c0,p1,r1,c1));

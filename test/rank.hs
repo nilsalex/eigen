@@ -19,14 +19,21 @@ main = do
     print $ pivots FullPivLU a
 
     let b = fromList [[0,0,0],[0,0,0],[0,0,0]] :: MatrixXf
-    putStrLn "Here is the matrix A:"
+    putStrLn "Here is the matrix B:"
     print b
 
-    putStrLn "The rank of A is:"
+    putStrLn "The rank of B is:"
     print $ rank FullPivLU b
 
-    putStrLn "Here is a matrix whose columns form a basis of the column-space of A:"
+    putStrLn "Here is a matrix whose columns form a basis of the column-space of B:"
     print $ image FullPivLU b
 
-    putStrLn "Here is a list of the pivot positions in A:"
+    putStrLn "Here is a list of the pivot positions in B:"
     print $ pivots FullPivLU b
+
+    let c = fromList [[0,0,0,0,0,1],[0,0,0,0,1,0],[0,0,0,1,0,0],[0,0,1,0,0,0],[0,1,0,0,0,0],[1,0,0,0,0,0]] :: MatrixXf
+    putStrLn "Here is the matrix C:"
+    print a
+
+    putStrLn "Here is a list of the pivot positions in C:"
+    print $ pivots FullPivLU c
