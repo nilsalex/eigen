@@ -141,6 +141,7 @@ extra-source-files: cbits/eigen-runtime.h
     eigen3/Eigen/src/misc/blas.h
     eigen3/Eigen/src/misc/lapacke.h
     eigen3/Eigen/src/misc/Image.h
+    eigen3/Eigen/src/misc/Pivots.h
     eigen3/Eigen/src/OrderingMethods/Eigen_Colamd.h
     eigen3/Eigen/src/OrderingMethods/Ordering.h
     eigen3/Eigen/src/OrderingMethods/Amd.h
@@ -739,4 +740,3 @@ Test-Suite test-regression
     main-is:            test/regression.hs
     default-language:   Haskell2010
     build-depends:      base, primitive, vector, bytestring, transformers, binary, eigen
-

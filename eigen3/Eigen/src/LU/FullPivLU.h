@@ -218,6 +218,13 @@ template<typename _MatrixType> class FullPivLU
       return internal::image_retval<FullPivLU>(*this, originalMatrix);
     }
 
+    inline const internal::pivots_retval<FullPivLU>
+      pivots(const MatrixType& originalMatrix) const
+    {
+      eigen_assert(m_isInitialized && "LU is not initialized.");
+      return internal::pivots_retval<FullPivLU>(*this, originalMatrix);
+    }
+
     /** \return a solution x to the equation Ax=b, where A is the matrix of which
       * *this is the LU decomposition.
       *
@@ -732,6 +739,34 @@ struct image_retval<FullPivLU<_MatrixType> >
 
     for(Index i = 0; i < rank(); ++i)
       dst.col(i) = originalMatrix().col(dec().permutationQ().indices().coeff(pivots.coeff(i)));
+  }
+};
+
+template<typename _MatrixType>
+struct pivots_retval<FullPivLU<_MatrixType> >
+  : pivots_retval_base<FullPivLU<_MatrixType> >
+{
+  EIGEN_MAKE_PIVOTS_HELPERS(FullPivLU<_MatrixType>)
+
+  enum { MaxSmallDimAtCompileTime = EIGEN_SIZE_MIN_PREFER_FIXED(
+            MatrixType::MaxColsAtCompileTime,
+            MatrixType::MaxRowsAtCompileTime)
+  };
+
+  template<typename Dest> void evalTo(Dest& dst) const
+  {
+    using std::abs;
+    if(rank() == 0)
+    {
+      return;
+    }
+
+    RealScalar premultiplied_threshold = dec().maxPivot() * dec().threshold();
+    Index p = 0;
+    for(Index i = 0; i < dec().nonzeroPivots(); ++i)
+      if(abs(dec().matrixLU().coeff(i,i)) > premultiplied_threshold)
+        dst.coeffRef(p++) = dec().permutationQ().indices().coeff(i);
+    eigen_internal_assert(p == rank());
   }
 };
 

@@ -138,6 +138,8 @@ template<typename DecompositionType> struct kernel_retval_base;
 template<typename DecompositionType> struct kernel_retval;
 template<typename DecompositionType> struct image_retval_base;
 template<typename DecompositionType> struct image_retval;
+template<typename DecompositionType> struct pivots_retval_base;
+template<typename DecompositionType> struct pivots_retval;
 } // end namespace internal
 
 namespace internal {

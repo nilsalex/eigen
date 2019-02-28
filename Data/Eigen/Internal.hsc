@@ -169,6 +169,7 @@ magicCode x = MagicCode (code x `xor` 0x45696730)
 #api1 determinant,   "Ptr b -> Ptr b -> CInt -> CInt -> IO CString"
 #api1 rank,          "CInt -> Ptr CInt -> Ptr b -> CInt -> CInt -> IO CString"
 #api1 image,         "CInt -> Ptr (Ptr b) -> Ptr CInt -> Ptr CInt -> Ptr b -> CInt -> CInt -> IO CString"
+#api1 pivots,        "CInt -> Ptr (Ptr CInt) -> Ptr CInt -> Ptr b -> CInt -> CInt -> IO CString"
 #api1 kernel,        "CInt -> Ptr (Ptr b) -> Ptr CInt -> Ptr CInt -> Ptr b -> CInt -> CInt -> IO CString"
 #api1 solve,         "CInt -> Ptr b -> CInt -> CInt -> Ptr b -> CInt -> CInt -> Ptr b -> CInt -> CInt -> IO CString"
 #api1 relativeError, "Ptr b -> Ptr b -> CInt -> CInt -> Ptr b -> CInt -> CInt -> Ptr b -> CInt -> CInt -> IO CString"

@@ -103,6 +103,7 @@ Matrix 3x2
     rank,
     kernel,
     image,
+    pivots,
     -- * Multiple linear regression
     {- | A linear regression model that contains more than one predictor variable. -}
     linearRegression
@@ -221,6 +222,19 @@ image d m1 = I.performIO $
             fp <- FC.newForeignPtr vals $ I.free vals
             return $ Matrix rows cols $ VS.unsafeFromForeignPtr0 fp $ rows * cols
 
+-- | Return a row vector containing the pivot elements of @A@
+pivots :: I.Elem a b => Decomposition -> Matrix a b -> [Int]
+pivots d m1 = I.performIO $
+    alloca $ \pvals ->
+    alloca $ \pcols ->
+        unsafeWith m1 $ \vals1 rows1 cols1 -> do
+            I.call $ I.pivots (I.cast $ fromEnum d)
+                pvals pcols
+                vals1 rows1 cols1
+            vals <- peek pvals
+            cols <- I.cast <$> peek pcols
+            fp <- FC.newForeignPtr vals $ I.free vals
+            return $ P.map I.cast $ VS.toList $ VS.unsafeFromForeignPtr0 fp cols
 
 {- |
 [(coeffs, error) = linearRegression points] computes multiple linear regression @y = a1 x1 + a2 x2 + ... + an xn + b@ using 'ColPivHouseholderQR' decomposition

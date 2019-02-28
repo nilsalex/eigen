@@ -25,6 +25,7 @@
 
 #include "src/misc/Kernel.h"
 #include "src/misc/Image.h"
+#include "src/misc/Pivots.h"
 #include "src/LU/FullPivLU.h"
 #include "src/LU/PartialPivLU.h"
 #ifdef EIGEN_USE_LAPACKE
