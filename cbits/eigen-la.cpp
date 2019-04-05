@@ -24,7 +24,10 @@ RET rank(Decomposition d, int* v, const void* p, int r, int c) {
             *v = A.fullPivHouseholderQr().rank();
             break;
         case ::JacobiSVD:
-            *v = A.jacobiSvd(ComputeThinU | ComputeThinV).rank();
+            {
+              Eigen::JacobiSVD<Matrix<T,Dynamic,Dynamic>> svd(A);
+              *v = svd.rank();
+            }
             break;
         default:
             return strdup("Selected decomposition doesn't support rank revealing.");
