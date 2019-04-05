@@ -723,7 +723,7 @@ library
     cxx-options:        --std=c++14
 
     if flag(mkl)
-        extra-libraries:    mkl_intel_lp64 mkl_gnu_thread mkl_core gomp pthread m dl
+        extra-libraries:    mkl_intel_lp64 mkl_intel_thread mkl_core iomp5 pthread m dl
         cc-options:         -fopenmp -m64 -DMKL_LP64 -DEIGEN_USE_MKL_ALL
 
 Test-Suite test-solve
