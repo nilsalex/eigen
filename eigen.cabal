@@ -720,7 +720,7 @@ library
                         cbits/eigen-la.cpp
                         cbits/eigen-sparse-la.cpp
     extra-libraries:    stdc++
-    cxx-options:        std=c++14
+    cxx-options:        --std=c++14
 
     if flag(mkl)
         extra-libraries:    mkl_intel_lp64 mkl_gnu_thread mkl_core gomp pthread m dl

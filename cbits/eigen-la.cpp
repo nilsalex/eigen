@@ -25,7 +25,7 @@ RET rank(Decomposition d, int* v, const void* p, int r, int c) {
             break;
         case ::JacobiSVD:
             {
-              Eigen::JacobiSVD<Matrix<T,Dynamic,Dynamic>> svd(A);
+              Eigen::JacobiSVD<Matrix<T,Dynamic,Dynamic> > svd(A);
               *v = svd.rank();
             }
             break;
