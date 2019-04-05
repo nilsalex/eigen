@@ -724,7 +724,7 @@ library
 
     if flag(mkl)
         extra-libraries:    mkl_intel_lp64 mkl_intel_thread mkl_core iomp5 pthread m dl
-        cc-options:         -fopenmp -m64 -DMKL_LP64 -DEIGEN_USE_MKL_ALL
+        cc-options:         -m64 -DMKL_LP64 -DEIGEN_USE_MKL_ALL
 
 Test-Suite test-solve
     type:               exitcode-stdio-1.0
