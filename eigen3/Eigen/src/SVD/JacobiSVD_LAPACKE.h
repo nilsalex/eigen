@@ -68,8 +68,7 @@ JacobiSVD<Matrix<EIGTYPE, Dynamic, Dynamic, EIGCOLROW, Dynamic, Dynamic>, ColPiv
     vt   = (LAPACKE_TYPE*)localV.data(); \
   } else { ldvt=1; vt=&dummy; }\
   Matrix<LAPACKE_RTYPE, Dynamic, Dynamic> superb; superb.resize(m_diagSize, 1); \
-  MatrixType m_temp; m_temp = matrix; \
-  LAPACKE_##LAPACKE_PREFIX##gesvd( matrix_order, jobu, jobvt, internal::convert_index<lapack_int>(m_rows), internal::convert_index<lapack_int>(m_cols), (LAPACKE_TYPE*)m_temp.data(), lda, (LAPACKE_RTYPE*)m_singularValues.data(), u, ldu, vt, ldvt, superb.data()); \
+  LAPACKE_##LAPACKE_PREFIX##gesvd( matrix_order, jobu, jobvt, internal::convert_index<lapack_int>(m_rows), internal::convert_index<lapack_int>(m_cols), (LAPACKE_TYPE*)matrix.data(), lda, (LAPACKE_RTYPE*)m_singularValues.data(), u, ldu, vt, ldvt, superb.data()); \
   if (computeV()) m_matrixV = localV.adjoint(); \
  /* for(int i=0;i<m_diagSize;i++) if (m_singularValues.coeffRef(i) < precision) { m_nonzeroSingularValues--; m_singularValues.coeffRef(i)=RealScalar(0);}*/ \
   m_isInitialized = true; \
